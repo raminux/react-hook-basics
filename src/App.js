@@ -1,14 +1,26 @@
 import logo from "./logo.svg";
-import "./App.css";
-import { useInput } from "./hooks/useInput";
+// import "./App.css";
+import { useTabs } from "./hooks/useTabs";
+
+const content = [
+  {
+    tab: "Section 1",
+    content: "I'm the content of section 1.",
+  },
+  {
+    tab: "Section 2",
+    content: "I'm the content of section 2.",
+  },
+];
 
 function App() {
-  const maxLen = (value) => value.length <= 10;
-  const name = useInput("Mr. ", maxLen);
+  const { currentItem, changeItem } = useTabs(0, content);
   return (
     <div className="App">
-      <h1>Hello</h1>
-      <input placeholder="Name" {...name} />
+      {content.map((section, index) => {
+        return <button onClick={() => changeItem(index)}>{section.tab}</button>;
+      })}
+      <div>{currentItem.content}</div>
     </div>
   );
 }
