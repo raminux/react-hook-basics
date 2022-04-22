@@ -1,20 +1,14 @@
-import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import { useInput } from "./hooks/useInput";
 
 function App() {
-  const [item, setItem] = useState(0);
-  const incrementItem = () => {
-    setItem(item + 1);
-  };
-  const decrementItem = () => {
-    setItem(item - 1);
-  };
+  const maxLen = (value) => value.length <= 10;
+  const name = useInput("Mr. ", maxLen);
   return (
     <div className="App">
-      <h1>Hello {item}</h1>
-      <button onClick={incrementItem}>Increase</button>
-      <button onClick={decrementItem}>Decrease</button>
+      <h1>Hello</h1>
+      <input placeholder="Name" {...name} />
     </div>
   );
 }
